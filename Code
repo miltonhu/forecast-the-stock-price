@@ -4,3 +4,26 @@ import pandas as pd
 import matplotlib.pyplot as pt
 start = datetime.datetime(2013, 2, 28) 
 end   = datetime.datetime(2018, 2, 28)
+
+aapl  = web.DataReader('AAPL','yahoo', start, end)
+msft  = web.DataReader('MSFT','yahoo', start, end)
+goog  = web.DataReader('GOOG','yahoo', start, end)
+
+pylab.rcParams['figure.figsize']=(15,9)
+#aapl["Adj Close"].plot(grid=True)
+stocks=pd.DataFrame({"AAPL": aapl["Adj Close"],
+                     "MSFT": msft["Adj Close"],
+                     "GOOG": goog["Adj Close"]})
+
+stocks.head()
+stocks.plot(grid = True)
+stock_return = stocks.apply(lambda x: x / x[0])
+stock_return.head()
+stock_return.plot(grid = True).axhline(y = 1, color = "black", lw = 2)
+
+
+
+
+#### The two websites for scapy
+https://www.fool.com/
+https://www.moneycrashers.com/
